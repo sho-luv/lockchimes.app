@@ -282,4 +282,5 @@
 
   // Let the page poke it (e.g. the Pro section plays a sound).
   window.lock3d = { open, slam, bounce, setColors(bodyHex, shackleHex) { bodyMat.color.set(bodyHex); shackleMat.color.set(shackleHex); } };
+  window.dispatchEvent(new Event('lock3d-ready'));
 })();

@@ -19,14 +19,18 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
-:root { --bg:#05070a; --surface:#0d1118; --surface-2:#131924; --border:#1e2733; --text:#eef2f6; --muted:#8a97a6; --dim:#5a6675; --red:#ff2e2e; --cyan:#22d3ee; --green:#34d399; --glow:rgba(255,46,46,0.45); }
+:root { --bg:#05070a; --surface:#0d1118; --surface-2:#131924; --border:#1e2733; --text:#eef2f6; --muted:#8a97a6; --dim:#5a6675; --red:#ff2e2e; --on-red:#fff; --cyan:#22d3ee; --green:#34d399; --glow:rgba(255,46,46,0.45); --nav:rgba(5,7,10,0.7); }
+:root[data-theme="paper"] { --bg:#EEE7DC; --surface:#FFFFFF; --surface-2:#F7F2EA; --border:#DDD5C8; --text:#141414; --muted:#5B564E; --dim:#7D776D; --red:#FF2E2E; --on-red:#fff; --glow:rgba(255,46,46,0.35); --nav:rgba(238,231,220,0.8); }
+:root[data-theme="electric"] { --bg:#050505; --surface:#161616; --surface-2:#1F1F1F; --border:#2A2A2A; --text:#FFFFFF; --muted:#9C9C9C; --dim:#6B6B6B; --red:#14A8FF; --on-red:#000; --glow:rgba(20,168,255,0.45); --nav:rgba(5,5,5,0.75); }
+:root[data-theme="hazard"] { --bg:#FFC400; --surface:#FFD94A; --surface-2:#FFE27A; --border:#D9A600; --text:#111111; --muted:#4A3F00; --dim:#6B5A00; --red:#111111; --on-red:#FFC400; --glow:rgba(0,0,0,0.3); --nav:rgba(255,196,0,0.85); }
+html { transition:background 0.3s; } body { transition:background 0.3s, color 0.3s; }
 * { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; }
 body { font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; -webkit-font-smoothing:antialiased; }
 a { color:inherit; }
 .mono { font-family:'JetBrains Mono',ui-monospace,monospace; }
 .wrap { max-width:960px; margin:0 auto; padding:0 1.5rem; }
-nav { position:fixed; top:0; width:100%; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:1rem 1.5rem; background:rgba(5,7,10,0.7); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border-bottom:1px solid var(--border); }
+nav { position:fixed; top:0; width:100%; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:1rem 1.5rem; background:var(--nav); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border-bottom:1px solid var(--border); }
 .brand { display:flex; align-items:center; gap:0.6rem; font-weight:800; letter-spacing:-0.02em; text-decoration:none; font-size:1.05rem; }
 .brand img { width:26px; height:26px; border-radius:7px; }
 .nav-links { display:flex; gap:1.4rem; font-size:0.9rem; }
@@ -45,7 +49,7 @@ h1 { font-size:clamp(2.3rem,6.5vw,4.4rem); line-height:1.04; font-weight:900; le
 .sub strong { color:var(--text); font-weight:600; }
 .btn-row { display:flex; gap:0.9rem; justify-content:center; flex-wrap:wrap; }
 .btn { display:inline-flex; align-items:center; gap:0.55rem; padding:0.85rem 1.5rem; border-radius:11px; font-weight:600; font-size:0.98rem; text-decoration:none; border:1px solid transparent; transition:all 0.2s; }
-.btn-primary { background:var(--red); color:#fff; box-shadow:0 6px 30px -8px var(--glow); }
+.btn-primary { background:var(--red); color:var(--on-red); box-shadow:0 6px 30px -8px var(--glow); }
 .btn-primary:hover { transform:translateY(-2px); }
 .btn-ghost { border-color:var(--border); color:var(--text); background:rgba(255,255,255,0.02); }
 .btn-ghost:hover { border-color:var(--red); }
@@ -96,15 +100,25 @@ footer { border-top:1px solid var(--border); padding:3rem 1.5rem; color:var(--di
 .fun li { color:var(--muted); padding:0.45rem 0; padding-left:1.4rem; position:relative; }
 .fun li::before { content:"◆"; position:absolute; left:0; color:var(--red); font-size:0.7rem; top:0.85rem; }
 .fun li strong { color:var(--text); }
-.themes { display:flex; gap:0.7rem; margin-top:1.3rem; }
-.themes { display:flex; gap:0.7rem; flex-wrap:wrap; margin:1.1rem 0 1.6rem; }
-.themes-cap { font-size:0.82rem; color:var(--dim); margin-top:0.9rem; }
-.swatch { width:72px; padding:0.55rem 0 0.45rem; border-radius:12px; border:1px solid var(--border); cursor:pointer; transition:transform 0.15s, border-color 0.15s; display:flex; flex-direction:column; align-items:center; gap:0.4rem; background:var(--bg); }
-.swatch:hover { transform:translateY(-2px); border-color:var(--red); }
+/* Floating theme picker (bottom-right), like the mascot on sholuv.net */
+.fab-wrap { position:fixed; right:1.25rem; bottom:1.25rem; z-index:200; display:flex; align-items:center; gap:0.7rem; }
+.fab-bubble { background:var(--surface); color:var(--text); border:1px solid var(--border); border-radius:12px; padding:0.6rem 0.9rem; font-size:0.9rem; box-shadow:0 10px 30px -10px rgba(0,0,0,0.5); white-space:nowrap; transition:opacity 0.25s, transform 0.25s; }
+.fab-bubble.hide { opacity:0; transform:translateX(8px); pointer-events:none; }
+.fab { width:58px; height:58px; border-radius:50%; border:2px solid var(--border); background:var(--surface); box-shadow:0 10px 30px -8px var(--glow); cursor:pointer; display:grid; place-items:center; padding:0; transition:transform 0.15s; }
+.fab:hover { transform:scale(1.06); }
+.fab img { width:40px; height:40px; border-radius:11px; pointer-events:none; }
+.fab-panel { position:fixed; right:1.25rem; bottom:5.6rem; z-index:200; background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:0.9rem; box-shadow:0 20px 50px -15px rgba(0,0,0,0.6); width:min(340px, calc(100vw - 2.5rem)); transform-origin:bottom right; transition:opacity 0.2s, transform 0.2s; }
+.fab-panel[hidden] { display:none; }
+.fab-panel h4 { font-size:0.95rem; margin-bottom:0.25rem; }
+.fab-panel p { font-size:0.8rem; color:var(--muted); margin-bottom:0.8rem; line-height:1.45; }
+.themes { display:grid; grid-template-columns:repeat(4, 1fr); gap:0.6rem; }
+.swatch { padding:0.55rem 0 0.45rem; border-radius:12px; border:2px solid transparent; outline:1px solid var(--border); cursor:pointer; transition:transform 0.15s, border-color 0.15s; display:flex; flex-direction:column; align-items:center; gap:0.4rem; background:var(--sbg); }
+.swatch:hover { transform:translateY(-2px); }
+.swatch.active { border-color:var(--red); }
 .swatch .mini { width:26px; height:26px; border-radius:8px; background:var(--body); position:relative; }
 .swatch .mini::before { content:""; position:absolute; left:50%; top:-9px; width:12px; height:11px; transform:translateX(-50%); border:3px solid var(--sh); border-bottom:0; border-radius:7px 7px 0 0; }
 .swatch .mini::after { content:""; position:absolute; left:50%; top:45%; width:5px; height:5px; border-radius:50%; background:rgba(0,0,0,0.55); transform:translate(-50%,-50%); }
-.swatch span { font-family:'JetBrains Mono',monospace; font-size:0.6rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink); }
+.swatch span { font-family:'JetBrains Mono',monospace; font-size:0.58rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink); }
 .cta { text-align:center; padding:5rem 1.5rem; }
 .cta h2 { margin-bottom:0.6rem; }
 @media (max-width:860px) { .ideas { grid-template-columns:1fr 1fr; } .fun { grid-template-columns:1fr; } }
@@ -177,16 +191,11 @@ footer { border-top:1px solid var(--border); padding:3rem 1.5rem; color:var(--di
                 <ul>
                     <li><strong>A real 3D padlock</strong> you can spin, flick and pop open. It clunks shut when you install a sound.</li>
                     <li><strong>Sounds and haptics</strong> for every tap. The dial clicks as it turns.</li>
-                    <li><strong>Four looks</strong>: Midnight, Paper, Electric and Hazard, each with a matching app icon.</li>
+                    <li><strong>Four looks</strong>: Midnight, Paper, Electric and Hazard, each with a matching app icon. Try them with the lock button in the corner.</li>
                     <li><strong>People</strong>: everyone in the family gets their own favorites, in their own order.</li>
                     <li><strong>Share</strong> any sound by Messages or AirDrop. Friends with the app import it in a tap.</li>
                 </ul>
-                <p class="themes-cap"><strong style="color:var(--text)">Try a look:</strong> tap a theme to recolor the lock above. In the app, the whole screen and the home-screen icon change with it.</p>
-                <div class="themes" aria-label="Themes">
-                    <div class="swatch" style="--bg:#141414;--ink:#F3EEE6;--body:#FF2E2E;--sh:#2B2B2B" title="Midnight: red lock, black background" data-body="#FF2E2E" data-shackle="#2B2B2B"><div class="mini"></div><span>Midnight</span></div>
-                    <div class="swatch" style="--bg:#EEE7DC;--ink:#141414;--body:#FF2E2E;--sh:#1C1C1C" title="Paper: red lock, cream background" data-body="#FF2E2E" data-shackle="#1C1C1C"><div class="mini"></div><span>Paper</span></div>
-                    <div class="swatch" style="--bg:#050505;--ink:#FFFFFF;--body:#14A8FF;--sh:#E8E8E8" title="Electric: blue lock, black background" data-body="#14A8FF" data-shackle="#E8E8E8"><div class="mini"></div><span>Electric</span></div>
-                    <div class="swatch" style="--bg:#FFC400;--ink:#111111;--body:#1A1A1A;--sh:#F3EEE6" title="Hazard: black lock, yellow background" data-body="#1A1A1A" data-shackle="#F3EEE6"><div class="mini"></div><span>Hazard</span></div>
+                <span>Hazard</span></div>
                 </div>
                 </div>
             </div>
@@ -235,10 +244,42 @@ footer { border-top:1px solid var(--border); padding:3rem 1.5rem; color:var(--di
 </footer>
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
-document.querySelectorAll('.swatch').forEach(s => s.addEventListener('click', () => {
-  if (window.lock3d) { window.lock3d.setColors(s.dataset.body, s.dataset.shackle); window.lock3d.bounce(); }
-  document.getElementById('lock3d').scrollIntoView({ behavior: 'smooth', block: 'center' });
-}));
+</script>
+<div class="fab-panel" id="fab-panel" hidden role="dialog" aria-label="Pick a look">
+    <h4>Pick a look.</h4>
+    <p>Recolors this page and the lock. In the app, the whole screen and the home-screen icon change with it.</p>
+    <div class="themes" aria-label="Themes">
+        <div class="swatch active" data-theme="midnight" style="--sbg:#141414;--ink:#F3EEE6;--body:#FF2E2E;--sh:#2B2B2B" title="Midnight: red lock, black background" data-body="#FF2E2E" data-shackle="#2B2B2B"><div class="mini"></div><span>Midnight</span></div>
+        <div class="swatch" data-theme="paper" style="--sbg:#EEE7DC;--ink:#141414;--body:#FF2E2E;--sh:#1C1C1C" title="Paper: red lock, cream background" data-body="#FF2E2E" data-shackle="#1C1C1C"><div class="mini"></div><span>Paper</span></div>
+        <div class="swatch" data-theme="electric" style="--sbg:#050505;--ink:#FFFFFF;--body:#14A8FF;--sh:#E8E8E8" title="Electric: blue lock, black background" data-body="#14A8FF" data-shackle="#E8E8E8"><div class="mini"></div><span>Electric</span></div>
+        <div class="swatch" data-theme="hazard" style="--sbg:#FFC400;--ink:#111111;--body:#1A1A1A;--sh:#F3EEE6" title="Hazard: black lock, yellow background" data-body="#1A1A1A" data-shackle="#F3EEE6"><div class="mini"></div><span>Hazard</span></div>
+    </div>
+</div>
+<div class="fab-wrap">
+    <div class="fab-bubble" id="fab-bubble">Try a look. Any look.</div>
+    <button class="fab" id="fab" aria-label="Pick a look" aria-expanded="false"><img src="/lock-chimes-icon.png" alt=""></button>
+</div>
+<script>
+(function(){
+  const panel=document.getElementById('fab-panel'), fab=document.getElementById('fab'), bubble=document.getElementById('fab-bubble');
+  const swatches=[...document.querySelectorAll('.swatch')];
+  function apply(name, animate){
+    if(name==='midnight') document.documentElement.removeAttribute('data-theme'); else document.documentElement.setAttribute('data-theme', name);
+    const s=swatches.find(x=>x.dataset.theme===name); if(!s) return;
+    swatches.forEach(x=>x.classList.toggle('active', x===s));
+    if(window.lock3d){ window.lock3d.setColors(s.dataset.body, s.dataset.shackle); if(animate) window.lock3d.bounce(); }
+    try{ localStorage.setItem('lc-theme', name); }catch(e){}
+  }
+  function open(o){ panel.hidden=!o; fab.setAttribute('aria-expanded', o); if(o) bubble.classList.add('hide'); }
+  fab.addEventListener('click', ()=>open(panel.hidden));
+  document.addEventListener('click', e=>{ if(!panel.hidden && !panel.contains(e.target) && !fab.contains(e.target)) open(false); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') open(false); });
+  swatches.forEach(s=>s.addEventListener('click', ()=>apply(s.dataset.theme, true)));
+  let saved=null; try{ saved=localStorage.getItem('lc-theme'); }catch(e){}
+  if(saved && saved!=='midnight'){ apply(saved,false); bubble.classList.add('hide'); }
+  else setTimeout(()=>bubble.classList.add('hide'), 9000);
+  window.addEventListener('lock3d-ready', ()=>{ const a=swatches.find(x=>x.classList.contains('active')); if(a&&window.lock3d) window.lock3d.setColors(a.dataset.body,a.dataset.shackle); });
+})();
 </script>
 </body>
 </html>
