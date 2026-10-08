@@ -112,10 +112,10 @@ footer { border-top:1px solid var(--border); padding:3rem 1.5rem; color:var(--di
 .fab-panel h4 { font-size:0.95rem; margin-bottom:0.25rem; }
 .fab-panel p { font-size:0.8rem; color:var(--muted); margin-bottom:0.8rem; line-height:1.45; }
 .themes { display:grid; grid-template-columns:repeat(4, 1fr); gap:0.6rem; }
-.swatch { padding:0.55rem 0 0.45rem; border-radius:12px; border:2px solid transparent; outline:1px solid var(--border); cursor:pointer; transition:transform 0.15s, border-color 0.15s; display:flex; flex-direction:column; align-items:center; gap:0.4rem; background:var(--sbg); }
+.swatch { padding:1.15rem 0 0.55rem; border-radius:12px; border:2px solid transparent; outline:1px solid var(--border); cursor:pointer; transition:transform 0.15s, border-color 0.15s; display:flex; flex-direction:column; align-items:center; gap:0.4rem; background:var(--sbg); }
 .swatch:hover { transform:translateY(-2px); }
 .swatch.active { border-color:var(--red); }
-.swatch .mini { width:26px; height:26px; border-radius:8px; background:var(--body); position:relative; }
+.swatch .mini { width:26px; height:26px; border-radius:8px; background:var(--body); position:relative; margin-top:2px; }
 .swatch .mini::before { content:""; position:absolute; left:50%; top:-9px; width:12px; height:11px; transform:translateX(-50%); border:3px solid var(--sh); border-bottom:0; border-radius:7px 7px 0 0; }
 .swatch .mini::after { content:""; position:absolute; left:50%; top:45%; width:5px; height:5px; border-radius:50%; background:rgba(0,0,0,0.55); transform:translate(-50%,-50%); }
 .swatch span { font-family:'JetBrains Mono',monospace; font-size:0.58rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink); }
