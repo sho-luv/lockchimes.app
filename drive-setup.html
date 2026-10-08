@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://lockchimes.app/drive-setup.html">
+<title>One USB drive for TeslaCam and Boombox — Lock Chimes</title>
+<meta name="description" content="Tesla ignores Boombox sounds on the TeslaCam drive. Split one drive into two partitions and keep both. This page writes the exact Mac or Windows commands for you.">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/lock-chimes-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root { --bg:#05070a; --surface:#0d1118; --surface-2:#131924; --border:#1e2733; --text:#eef2f6; --muted:#8a97a6; --dim:#5a6675; --red:#ff2e2e; --cyan:#22d3ee; --green:#34d399; --glow:rgba(255,46,46,0.45); }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; -webkit-font-smoothing:antialiased; }
+a { color:inherit; }
+.mono { font-family:'JetBrains Mono',ui-monospace,monospace; }
+.wrap { max-width:960px; margin:0 auto; padding:0 1.5rem; }
+nav { position:fixed; top:0; width:100%; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:1rem 1.5rem; background:rgba(5,7,10,0.7); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border-bottom:1px solid var(--border); }
+.brand { display:flex; align-items:center; gap:0.6rem; font-weight:800; letter-spacing:-0.02em; text-decoration:none; font-size:1.05rem; }
+.brand img { width:26px; height:26px; border-radius:7px; }
+.nav-links { display:flex; gap:1.4rem; font-size:0.9rem; }
+.nav-links a { color:var(--muted); text-decoration:none; }
+.nav-links a:hover { color:var(--text); }
+.hero { padding:9rem 1.5rem 4rem; text-align:center; position:relative; overflow:hidden; }
+.hero::before { content:""; position:absolute; top:-200px; left:50%; transform:translateX(-50%); width:700px; height:700px; background:radial-gradient(circle, rgba(255,46,46,0.16), transparent 65%); pointer-events:none; }
+.hero-inner { position:relative; max-width:760px; margin:0 auto; }
+.hero img { width:120px; height:120px; border-radius:28px; box-shadow:0 20px 60px -20px var(--glow); margin-bottom:1.6rem; }
+.kicker { font-family:'JetBrains Mono',monospace; font-size:0.72rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--red); margin-bottom:1.2rem; font-weight:700; }
+h1 { font-size:clamp(2.3rem,6.5vw,4.4rem); line-height:1.04; font-weight:900; letter-spacing:-0.035em; margin-bottom:1.3rem; }
+.sub { font-size:clamp(1.05rem,2.2vw,1.25rem); color:var(--muted); max-width:620px; margin:0 auto 2.2rem; }
+.sub strong { color:var(--text); font-weight:600; }
+.btn-row { display:flex; gap:0.9rem; justify-content:center; flex-wrap:wrap; }
+.btn { display:inline-flex; align-items:center; gap:0.55rem; padding:0.85rem 1.5rem; border-radius:11px; font-weight:600; font-size:0.98rem; text-decoration:none; border:1px solid transparent; transition:all 0.2s; }
+.btn-primary { background:var(--red); color:#fff; box-shadow:0 6px 30px -8px var(--glow); }
+.btn-primary:hover { transform:translateY(-2px); }
+.btn-ghost { border-color:var(--border); color:var(--text); background:rgba(255,255,255,0.02); }
+.btn-ghost:hover { border-color:var(--red); }
+.note { margin-top:1.2rem; font-size:0.82rem; color:var(--dim); }
+section { padding:4.5rem 0; border-top:1px solid var(--border); }
+.eyebrow { font-family:'JetBrains Mono',monospace; font-size:0.72rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--red); margin-bottom:0.9rem; }
+h2 { font-size:clamp(1.7rem,4vw,2.5rem); font-weight:800; letter-spacing:-0.03em; line-height:1.1; margin-bottom:1rem; }
+.lead { color:var(--muted); font-size:1.05rem; max-width:620px; }
+.grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; margin-top:2.2rem; }
+.card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:1.5rem; }
+.card .n { font-family:'JetBrains Mono',monospace; font-size:2rem; font-weight:700; color:var(--red); line-height:1; margin-bottom:0.7rem; }
+.card h3 { font-size:1.05rem; margin-bottom:0.4rem; }
+.card p { color:var(--muted); font-size:0.92rem; }
+ul.feat { list-style:none; margin-top:1.6rem; display:grid; grid-template-columns:1fr 1fr; gap:0.7rem 2rem; }
+ul.feat li { color:var(--muted); padding-left:1.4rem; position:relative; font-size:0.96rem; }
+ul.feat li::before { content:"◆"; position:absolute; left:0; color:var(--red); font-size:0.7rem; top:0.35rem; }
+ul.feat li strong { color:var(--text); }
+.pro { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; margin-top:2rem; }
+.tier { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:1.6rem; }
+.tier.hi { border-color:rgba(255,46,46,0.5); background:linear-gradient(135deg,var(--surface-2),var(--surface)); }
+.tier h3 { font-size:1.2rem; display:flex; justify-content:space-between; align-items:baseline; }
+.tier h3 span { font-family:'JetBrains Mono',monospace; font-size:0.9rem; color:var(--muted); }
+.tier ul { list-style:none; margin-top:0.9rem; }
+.tier li { color:var(--muted); font-size:0.92rem; padding:0.25rem 0; }
+.tier li::before { content:"✓ "; color:var(--green); }
+.faq details { border:1px solid var(--border); border-radius:12px; padding:1rem 1.2rem; margin-top:0.8rem; background:var(--surface); }
+.faq summary { cursor:pointer; font-weight:600; }
+.faq p { color:var(--muted); margin-top:0.7rem; font-size:0.95rem; }
+.faq code { font-family:'JetBrains Mono',monospace; font-size:0.85em; background:var(--surface-2); padding:0.1em 0.4em; border-radius:4px; }
+footer { border-top:1px solid var(--border); padding:3rem 1.5rem; color:var(--dim); font-size:0.82rem; }
+.foot-inner { max-width:960px; margin:0 auto; display:flex; justify-content:space-between; gap:1.5rem; flex-wrap:wrap; }
+.foot-inner a { color:var(--muted); text-decoration:none; }
+.disclaimer { max-width:960px; margin:1rem auto 0; font-size:0.78rem; color:var(--dim); }
+@media (max-width:820px) { .grid, .pro, ul.feat { grid-template-columns:1fr; } .nav-links a:not(.keep) { display:none; } }
+</style>
+<style>
+.hero { padding-bottom:2.5rem; }
+.wizard { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:1.5rem; margin-top:2rem; }
+.row { display:flex; gap:1rem; flex-wrap:wrap; align-items:center; margin-bottom:1rem; }
+.row label { color:var(--muted); font-size:0.92rem; min-width:9rem; }
+.seg { display:inline-flex; border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+.seg button { background:transparent; color:var(--muted); border:0; padding:0.55rem 1rem; font:inherit; font-weight:600; cursor:pointer; }
+.seg button.on { background:var(--red); color:#fff; }
+input[type=number], input[type=text] { background:var(--surface-2); color:var(--text); border:1px solid var(--border); border-radius:8px; padding:0.5rem 0.7rem; font:inherit; width:7rem; }
+.chk { display:inline-flex; align-items:center; gap:0.45rem; color:var(--muted); font-size:0.92rem; margin-right:1.2rem; }
+pre { font-family:'JetBrains Mono',monospace; font-size:0.82rem; background:#000; border:1px solid var(--border); border-radius:12px; padding:1rem 1.1rem; overflow-x:auto; white-space:pre; line-height:1.55; position:relative; }
+pre .c { color:var(--dim); }
+.copy { position:absolute; top:0.6rem; right:0.6rem; background:var(--surface-2); color:var(--text); border:1px solid var(--border); border-radius:7px; padding:0.25rem 0.6rem; font:inherit; font-size:0.75rem; cursor:pointer; }
+.steps { counter-reset:s; margin-top:1.5rem; }
+.step { display:flex; gap:1rem; margin-top:1.3rem; }
+.step::before { counter-increment:s; content:counter(s); font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--red); font-size:1.3rem; line-height:1.2; min-width:1.4rem; }
+.step h3 { font-size:1.02rem; margin-bottom:0.3rem; }
+.step p { color:var(--muted); font-size:0.94rem; }
+.warn { border:1px solid rgba(255,46,46,0.5); background:rgba(255,46,46,0.08); border-radius:12px; padding:0.9rem 1.1rem; color:var(--text); font-size:0.93rem; margin-top:1rem; }
+.layout { display:flex; height:46px; border-radius:10px; overflow:hidden; border:1px solid var(--border); margin:1rem 0 0.4rem; font-family:'JetBrains Mono',monospace; font-size:0.72rem; font-weight:700; }
+.layout div { display:flex; align-items:center; justify-content:center; color:#000; }
+.layout .p-boom { background:var(--red); color:#fff; }
+.layout .p-light { background:var(--cyan); }
+.layout .p-music { background:var(--green); }
+.layout .p-cam { background:#8a97a6; }
+@media (max-width:640px) { .row label { min-width:100%; } }
+</style>
+</head>
+<body>
+<nav>
+    <a class="brand" href="/"><img src="/lock-chimes-icon.png" alt=""> Lock Chimes</a>
+    <div class="nav-links">
+        <a href="/#how">How it works</a>
+        <a href="/#pro">Pro</a>
+        <a href="/#help">Help</a>
+    </div>
+</nav>
+
+<header class="hero">
+    <div class="hero-inner">
+        <div class="kicker">Drive setup</div>
+        <h1>One USB drive for TeslaCam <em>and</em> Boombox.</h1>
+        <p class="sub">The car ignores a <code class="mono">Boombox</code> folder on the drive that records TeslaCam. But it reads every <strong>partition</strong> on a drive as its own volume. So split the drive once: a small Boombox part, a big TeslaCam part. Both work, nothing to unplug, and the Lock Chimes app sees each part as a drive.</p>
+    </div>
+</header>
+
+<section>
+<div class="wrap">
+    <div class="eyebrow">Build your commands</div>
+    <h2>Pick your setup</h2>
+    <p class="lead">A web page can't touch a disk directly, so this page writes the exact commands for your computer and you paste them in. Takes about two minutes.</p>
+
+    <div class="wizard">
+        <div class="row"><label>Computer</label>
+            <div class="seg" id="os"><button data-v="mac" class="on">Mac</button><button data-v="win">Windows</button></div></div>
+        <div class="row"><label>Drive size</label><input type="number" id="size" value="128" min="8" step="1"> <span style="color:var(--dim)">GB</span></div>
+        <div class="row"><label>Also make</label>
+            <label class="chk"><input type="checkbox" id="light"> LightShow (1 GB)</label>
+            <label class="chk"><input type="checkbox" id="music"> Music <input type="number" id="musicgb" value="32" min="1" style="width:4.5rem;margin:0 0.3rem"> GB</label></div>
+        <div class="row"><label id="disklabel">Disk name</label><input type="text" id="disk" value="disk4" class="mono"> <span style="color:var(--dim);font-size:0.85rem" id="diskhint">from step 2 below, e.g. <span class="mono">disk4</span></span></div>
+        <div class="layout" id="layout"></div>
+        <p class="note" id="summary"></p>
+    </div>
+
+    <div class="warn"><strong>This erases the whole drive.</strong> Copy anything you want from the <span class="mono">TeslaCam</span> folder to your computer first. And double-check the disk name: the command below will happily wipe the wrong drive.</div>
+
+    <div class="steps" id="steps"></div>
+</div>
+</section>
+
+<section>
+<div class="wrap">
+    <div class="eyebrow">After that</div>
+    <h2>Back in the car</h2>
+    <ul class="feat">
+        <li><strong>Boombox sounds</strong> go in the <code class="mono">Boombox</code> folder on the BOOMBOX part. Up to 5, no spaces in the names. The app does this for you.</li>
+        <li><strong>The lock chime</strong> is <code class="mono">LockChime.wav</code> at the top level. The app writes it to whichever part you pick; putting it on both is fine.</li>
+        <li><strong>TeslaCam</strong> records to the TESLACAM part exactly as before.</li>
+        <li><strong>On the iPhone</strong>, the drive shows up as two drives (BOOMBOX and TESLACAM). Pick BOOMBOX for Boombox installs.</li>
+    </ul>
+    <p class="note">Prefer not to use the Terminal? A small Mac app that does all of this with one click is on the way. In the meantime a second USB stick in a glovebox hub works too.</p>
+</div>
+</section>
+
+<footer>
+    <div class="foot-inner">
+        <div>© <span id="year">2026</span> Enfrosec LLC · dba Faraday Soft</div>
+        <div>
+            <a href="/privacy.html">Privacy</a> &nbsp;·&nbsp;
+            <a href="mailto:support@faradaysoft.com">Support</a> &nbsp;·&nbsp;
+            <a href="https://faradaysoft.com">Faraday Soft</a>
+        </div>
+    </div>
+    <p class="disclaimer">Lock Chimes is not affiliated with, endorsed by, or connected to Tesla, Inc. Tesla is a trademark of Tesla, Inc.</p>
+</footer>
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+const $ = id => document.getElementById(id);
+let os = 'mac';
+$('os').querySelectorAll('button').forEach(b => b.onclick = () => { os = b.dataset.v; $('os').querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b)); render(); });
+['size','light','music','musicgb','disk'].forEach(id => $(id).addEventListener('input', render));
+function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+function render() {
+  const size = Math.max(8, +$('size').value || 0), light = $('light').checked, music = $('music').checked;
+  const musicGB = Math.max(1, +$('musicgb').value || 1);
+  const parts = [['BOOMBOX', 1, 'p-boom']];
+  if (light) parts.push(['LIGHTSHOW', 1, 'p-light']);
+  if (music) parts.push(['MUSIC', musicGB, 'p-music']);
+  const used = parts.reduce((a, p) => a + p[1], 0);
+  const camGB = Math.max(1, size - used);
+  parts.push(['TESLACAM', camGB, 'p-cam']);
+  $('layout').innerHTML = parts.map(p => `<div class="${p[2]}" style="flex:${Math.max(p[1], size * 0.08)}" title="${p[0]} ${p[1]} GB">${p[0]}</div>`).join('');
+  $('summary').textContent = parts.map(p => `${p[0]} ${p[1]} GB`).join(' · ') + ' · all exFAT · GPT';
+  const diskRaw = ($('disk').value || '').trim();
+  $('disklabel').textContent = os === 'mac' ? 'Disk name' : 'Disk number';
+  $('diskhint').innerHTML = os === 'mac' ? 'from step 2 below, e.g. <span class="mono">disk4</span>' : 'from step 2 below, e.g. <span class="mono">2</span>';
+  let steps;
+  if (os === 'mac') {
+    const disk = diskRaw.replace(/^\/dev\//, '') || 'diskN';
+    const spec = parts.map((p, i) => `ExFAT ${p[0]} ${i === parts.length - 1 ? 'R' : p[1] + 'G'}`).join(' ');
+    steps = [
+      ['Plug the drive into the Mac', 'Open <b>Terminal</b> (Spotlight → type Terminal).'],
+      ['Find the drive', `Run this and find your drive by size and name. Its identifier looks like <span class="mono">disk4</span>. Type that in the box above.<pre><button class="copy">Copy</button>diskutil list external physical</pre>`],
+      ['Partition it', `This one line does everything. It asks for nothing, so make sure <span class="mono">${esc(disk)}</span> is the USB drive.<pre><button class="copy">Copy</button>diskutil partitionDisk /dev/${esc(disk)} GPT ${esc(spec)}</pre>`],
+      ['Make the folders', `<pre><button class="copy">Copy</button>mkdir -p /Volumes/BOOMBOX/Boombox /Volumes/TESLACAM/TeslaCam${light ? ' /Volumes/LIGHTSHOW/LightShow' : ''}${music ? ' /Volumes/MUSIC/Music' : ''} &amp;&amp; diskutil eject /dev/${esc(disk)}</pre>`],
+      ['Done', 'Unplug it. Put it in the glovebox port, or in your iPhone to add sounds with Lock Chimes.'],
+    ];
+  } else {
+    const n = diskRaw.replace(/\D/g, '') || 'N';
+    const lines = ['select disk ' + n, 'clean', 'convert gpt'];
+    parts.forEach((p, i) => {
+      lines.push(i === parts.length - 1 ? 'create partition primary' : `create partition primary size=${p[1] * 1024}`);
+      lines.push(`format fs=exfat quick label=${p[0]}`, 'assign');
+    });
+    lines.push('exit');
+    steps = [
+      ['Plug the drive into the PC', 'Open <b>Command Prompt as administrator</b> (Start → type cmd → right-click → Run as administrator).'],
+      ['Find the drive', `Type <span class="mono">diskpart</span>, then <span class="mono">list disk</span>. Find the USB drive by size; note its number. Type that number in the box above.`],
+      ['Partition it', `Still inside diskpart, paste these lines. <b>Disk ${esc(n)} will be erased.</b><pre><button class="copy">Copy</button>${esc(lines.join('\n'))}</pre>`],
+      ['Make the folders', `In File Explorer, open the new BOOMBOX drive and create a folder named <span class="mono">Boombox</span>. Open TESLACAM and create <span class="mono">TeslaCam</span>.${light ? ' Open LIGHTSHOW and create <span class="mono">LightShow</span>.' : ''}${music ? ' Open MUSIC and create <span class="mono">Music</span>.' : ''} Capitalization matters.`],
+      ['Done', 'Eject it. Put it in the glovebox port, or in your iPhone to add sounds with Lock Chimes.'],
+    ];
+  }
+  $('steps').innerHTML = steps.map(s => `<div class="step"><div><h3>${s[0]}</h3><p>${s[1]}</p></div></div>`).join('');
+  $('steps').querySelectorAll('.copy').forEach(b => b.onclick = () => {
+    const pre = b.parentElement; const text = pre.innerText.replace(/^Copy\s*/, '');
+    navigator.clipboard.writeText(text).then(() => { b.textContent = 'Copied'; setTimeout(() => b.textContent = 'Copy', 1200); });
+  });
+}
+render();
+</script>
+</body>
+</html>
