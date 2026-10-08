@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="canonical" href="https://lockchimes.app/">
-<meta property="og:url" content="https://lockchimes.app/">
-<title>Lock Chimes — Make your Tesla's lock sound anything</title>
-<meta name="description" content="Lock Chimes for iPhone: record a sound, grab one from a video, or find a free one on the web, then install it to your Tesla's USB drive from your phone. No computer, no account, nothing leaves your phone.">
+<link rel="canonical" href="https://lockchimes.app/help.html">
+<meta property="og:url" content="https://lockchimes.app/help.html">
+<title>Help — Lock Chimes</title>
+<meta name="description" content="How to install a custom lock chime and Boombox sounds on a Tesla with the Lock Chimes iPhone app, plus everything we learned the hard way.">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <meta property="og:title" content="Lock Chimes — Make your Tesla's lock sound anything">
@@ -85,7 +85,7 @@ footer { border-top:1px solid var(--border); padding:3rem 1.5rem; color:var(--di
 .idea { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:1.3rem 1.3rem 1.2rem; position:relative; overflow:hidden; }
 .idea .q { font-size:1.35rem; font-weight:800; letter-spacing:-0.02em; line-height:1.15; }
 .idea .who { color:var(--muted); font-size:0.88rem; margin-top:0.6rem; }
-.idea .tag { display:block; margin-bottom:0.7rem; font-family:'JetBrains Mono',monospace; font-size:0.62rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--red); }
+.idea .tag { position:absolute; top:0.9rem; right:0.9rem; font-family:'JetBrains Mono',monospace; font-size:0.62rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--red); }
 .fun { display:grid; grid-template-columns:1.1fr 1fr; gap:2.5rem; align-items:center; margin-top:1rem; }
 .fun ul { list-style:none; margin-top:1.2rem; }
 .fun li { color:var(--muted); padding:0.45rem 0; padding-left:1.4rem; position:relative; }
@@ -100,109 +100,57 @@ footer { border-top:1px solid var(--border); padding:3rem 1.5rem; color:var(--di
 @media (max-width:860px) { .ideas { grid-template-columns:1fr 1fr; } .fun { grid-template-columns:1fr; } }
 @media (max-width:640px) { .ideas { grid-template-columns:1fr; } }
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js" defer></script>
-<script src="/lock3d.js" defer></script>
+
 </head>
 <body>
 <nav>
     <a class="brand" href="/"><img src="/lock-chimes-icon.png" alt=""> Lock Chimes</a>
     <div class="nav-links">
-        <a href="#how">How it works</a>
-        <a href="#pro">Pro</a>
-        <a href="/help.html">Help</a>
+        <a href="#setup">Setup</a>
+        <a href="#faq">FAQ</a>
+        <a href="/drive-setup.html">One drive for both</a>
     </div>
 </nav>
 
-<header class="hero">
+<header class="hero" style="padding-bottom:2rem">
     <div class="hero-inner">
-        <div class="lock-stage" id="lock3d"><img src="/lock-chimes-icon.png" alt="Lock Chimes icon"></div>
-        <div class="hint">Drag to spin · Tap to unlock</div>
-        <div class="kicker">Lock Chimes for iPhone</div>
-        <h1>Your Tesla. Your lock sound.</h1>
-        <p class="sub">Your kid yelling "bye car!". Your dog. Your own voice. Pick any sound, and your car plays it every time you walk away. Done <strong>from your iPhone</strong>, in about a minute.</p>
-        <div class="btn-row">
-            <a class="btn btn-primary" href="#how" id="store-link">Coming to the App Store</a>
-            <a class="btn btn-ghost" href="mailto:hello@lockchimes.app?subject=Tell%20me%20when%20Lock%20Chimes%20is%20out">Tell me when it's out</a>
-        </div>
-        <p class="note">Free to make and install your own chime. Pro is $4.99 once, no subscription.</p>
+        <div class="kicker">Help</div>
+        <h1>Everything the car won't tell you.</h1>
+        <p class="sub">The full setup, the exact file and folder names, and the things we learned on a real car. Stuck anyway? Email <a href="mailto:support@faradaysoft.com">support@faradaysoft.com</a>.</p>
     </div>
 </header>
 
-<section id="ideas">
+<section id="setup">
     <div class="wrap">
-        <div class="eyebrow">// what will yours say?</div>
-        <h2>The best lock sounds aren't downloads. They're yours.</h2>
-        <p class="lead">Five seconds is all the car plays. Five seconds is plenty.</p>
-        <div class="ideas">
-            <div class="idea"><span class="tag">Record</span><div class="q">"Bye, car!"</div><div class="who">Your four-year-old, every single time. Guaranteed to make the neighbours smile.</div></div>
-            <div class="idea"><span class="tag">From a video</span><div class="q">That one bark.</div><div class="who">Pull the audio straight out of a video in your Photos. No computer, no converter.</div></div>
-            <div class="idea"><span class="tag">Your voice</span><div class="q">"Locked. Go get 'em."</div><div class="who">A pep talk from yourself, in your voice, in the parking lot before the meeting.</div></div>
-            <div class="idea"><span class="tag">Boombox</span><div class="q">Five horn sounds.</div><div class="who">Fill the car's Boombox slots too. The car gets a different personality every day of the week.</div></div>
-        </div>
-    </div>
-</section>
-
-<section id="how">
-    <div class="wrap">
-        <div class="eyebrow">// how it works</div>
-        <h2>Three steps. No laptop.</h2>
+        <div class="eyebrow">// setup, start to finish</div>
+        <h2>Install a lock chime</h2>
         <div class="grid">
-            <div class="card"><div class="n">1</div><h3>Make a sound</h3><p>Record it, grab it from a video, or find a free one on the web, right inside the app. Trim it to the good part and give it a name.</p></div>
-            <div class="card"><div class="n">2</div><h3>Plug in the drive</h3><p>Take the car's USB drive out of the glovebox, plug it into your iPhone and tap <strong>Lock Chime</strong>. The app puts it exactly where the car looks and double-checks it landed.</p></div>
-            <div class="card"><div class="n">3</div><h3>Lock the car</h3><p>Put the drive back, flip one switch on the car's screen, and lock it from outside. That's your sound.</p></div>
+            <div class="card"><div class="n">1</div><h3>Make a sound</h3><p>Record anything, pull the audio out of a video in Photos, open a file, or tap a download button on a site with free sounds inside the app's Find Sounds browser. Trim to the best 5 seconds, boost, fade, name it.</p></div>
+            <div class="card"><div class="n">2</div><h3>Plug in the drive</h3><p>Take the car's USB drive out of the glovebox port and plug it into your iPhone (USB-C, or Lightning with a camera adapter). Tap <strong>Lock Chime</strong> and pick the drive when the Files picker opens. The app writes <code class="mono">LockChime.wav</code> at the top level of the drive, forces it onto the drive, and reads it back to confirm.</p></div>
+            <div class="card"><div class="n">3</div><h3>Lock the car</h3><p>Drive back in the glovebox. On the car's screen: <strong>Toybox → Boombox → Lock Sound → USB</strong>. Lock the car from outside. That's your sound.</p></div>
         </div>
-        <p class="note">Want the details, the folder names and the gotchas? They're all in <a href="/help.html" style="color:var(--muted)">Help</a>.</p>
+        <ul class="feat">
+            <li><strong>Boombox (Pro):</strong> up to 5 sounds in a <code class="mono">Boombox</code> folder, WAV or MP3, under 1 MB each, no spaces in the names. The app renames them for you. They show up as "USB &lt;name&gt;" in Toybox → Boombox. <strong>Needs its own USB stick</strong>, or <a href="/drive-setup.html">a drive split into two parts</a>.</li>
+            <li><strong>Drive check:</strong> format, free space, what's on the drive, and warnings when something's off.</li>
+            <li><strong>History:</strong> every install is kept, so you can put an old favorite back in one tap.</li>
+            <li><strong>Drives:</strong> each physical drive is remembered separately, even identical models. Pick a new one once.</li>
+        </ul>
     </div>
 </section>
 
-<section id="fun">
+<section id="faq" class="faq">
     <div class="wrap">
-        <div class="eyebrow">// made to be played with</div>
-        <div class="fun">
-            <div>
-                <h2>An app you'll open just to poke the lock.</h2>
-                <p class="lead">Most car utilities feel like a settings screen. This one feels like a toy that happens to do the job.</p>
-                <ul>
-                    <li><strong>A real 3D padlock</strong> you can spin, flick and pop open. It clunks shut when you install a sound.</li>
-                    <li><strong>Sounds and haptics</strong> for every tap. The dial clicks as it turns.</li>
-                    <li><strong>Four looks</strong>, each with its own app icon. Try one on the lock above.</li>
-                    <li><strong>People</strong>: everyone in the family gets their own favorites, in their own order.</li>
-                    <li><strong>Share</strong> any sound by Messages or AirDrop. Friends with the app import it in a tap.</li>
-                </ul>
-                <div class="themes" aria-label="Themes">
-                    <div class="swatch" style="background:#FF2E2E;--sh:#2B2B2B" title="Clay" data-body="#FF2E2E" data-shackle="#2B2B2B"></div>
-                    <div class="swatch" style="background:#FF2E2E;--sh:#1C1C1C" title="Paper" data-body="#FF2E2E" data-shackle="#1C1C1C"></div>
-                    <div class="swatch" style="background:#14A8FF;--sh:#E8E8E8" title="Electric" data-body="#14A8FF" data-shackle="#E8E8E8"></div>
-                    <div class="swatch" style="background:#1A1A1A;--sh:#F3EEE6" title="Hazard" data-body="#1A1A1A" data-shackle="#F3EEE6"></div>
-                </div>
-            </div>
-            <div class="card" style="text-align:center;padding:2rem">
-                <div class="eyebrow" style="margin-bottom:0.5rem">// private by design</div>
-                <h3 style="font-size:1.3rem;margin-bottom:0.6rem">Nothing leaves your phone.</h3>
-                <p style="color:var(--muted);font-size:0.95rem">No account. No analytics. No server of ours. Your recordings stay in your pocket and on your USB drive, and nowhere else. <a href="/privacy.html" style="color:var(--muted)">The whole privacy policy</a> fits on one screen.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="pro">
-    <div class="wrap">
-        <div class="eyebrow">// pricing</div>
-        <h2>Free to use. Pro to collect.</h2>
-        <p class="lead">The free version always makes and installs your own lock chime. Pro is a one-time purchase on your Apple ID. No subscription, ever.</p>
-        <div class="pro">
-            <div class="tier"><h3>Free <span>$0</span></h3><ul><li>Record, import from video or file, find sounds on the web</li><li>Trim, boost, fade, name</li><li>Install your lock chime, verified</li><li>Share sounds</li><li>Starter pack of original chimes</li></ul></div>
-            <div class="tier hi"><h3>Pro <span>$4.99 once</span></h3><ul><li>All 5 Boombox slots</li><li>Unlimited saved sounds</li><li>Unlimited people and favorites</li><li>Car drive plus spares</li><li>All four looks and app icons</li><li>Install history and backups</li></ul></div>
-        </div>
-    </div>
-</section>
-
-<section class="cta">
-    <h2>Make your car say something.</h2>
-    <p class="lead" style="margin:0 auto 1.6rem">Launching on the App Store. Works with Teslas that have the external speaker: Model 3 from late 2019, all Model Y, Model S and X from 2021, Cybertruck.</p>
-    <div class="btn-row">
-        <a class="btn btn-primary" href="mailto:hello@lockchimes.app?subject=Tell%20me%20when%20Lock%20Chimes%20is%20out">Tell me when it's out</a>
-        <a class="btn btn-ghost" href="/help.html">Read the help</a>
+        <div class="eyebrow">// things we learned the hard way</div>
+        <h2>FAQ</h2>
+        <p class="lead">Tested on a real car. Email <a href="mailto:support@faradaysoft.com">support@faradaysoft.com</a> if yours does something different.</p>
+        <details open><summary>The car ignores my LockChime.wav</summary><p>The lock chime must be a WAV named exactly <code>LockChime.wav</code> at the <strong>top level</strong> of the drive, not inside a folder. Several guides say <code>Boombox/LockChime.wav</code>; on our test car that file was ignored. The app writes it to the top level for you. Also check <strong>Toybox → Boombox → Lock Sound</strong> is set to <strong>USB</strong>.</p></details>
+        <details><summary>My Boombox sounds don't show up</summary><p>Boombox needs its <strong>own USB stick</strong>. On a drive that also records TeslaCam the car ignores the <code>Boombox</code> folder entirely (tested; Tesla's manual says the drive "can only contain one folder"). Use a spare exFAT stick with nothing but <code>Boombox</code> on it, or <a href="/drive-setup.html">split one drive into a TeslaCam part and a Boombox part</a>, and the sounds appear in Toybox → Boombox as "USB &lt;name&gt;". WAV and MP3 both play. File names can't have spaces; the app handles that. Boombox plays while parked.</p></details>
+        <details><summary>Can I keep TeslaCam and Boombox on one drive?</summary><p>Yes, with two partitions: a small BOOMBOX one and a big TESLACAM one. The car reads each as its own drive, and so does the iPhone. <a href="/drive-setup.html">This page writes the Mac or Windows commands for you.</a> A Mac app that does it in one click is coming.</p></details>
+        <details><summary>The app can't see my USB drive</summary><p>iOS shows USB drives in the Files app under Locations. If it isn't there, the phone isn't reading it: usually an NTFS-formatted drive (use exFAT or FAT32) or a drive that needs more power than the phone's port provides (use a powered hub). Each physical drive is remembered separately, even identical ones; pick a new drive once in the app.</p></details>
+        <details><summary>Which cars work?</summary><p>Teslas with the external speaker: Model 3 built from late 2019, all Model Y, Model S and X from 2021, and Cybertruck. If <strong>Toybox → Boombox</strong> exists on your screen, you're set.</p></details>
+        <details><summary>How long can a sound be?</summary><p>The car plays up to 5 seconds for the lock chime and wants the file under 1 MB. The app trims and converts so you don't have to think about it.</p></details>
+        <details><summary>Where does my data go?</summary><p>Nowhere. No accounts, no analytics, no server of ours. Sounds stay on your phone (visible in Files under On My iPhone › Lock Chimes). Full details in the <a href="/privacy.html">privacy policy</a>.</p></details>
+        <details><summary>Can I use songs or movie clips?</summary><p>Use sounds you have the right to use. The app ships with original chimes and makes it easy to record your own; it hosts no third-party clips. Sites with free sounds state their own terms, and many allow personal use in your own car.</p></details>
     </div>
 </section>
 
@@ -210,21 +158,14 @@ footer { border-top:1px solid var(--border); padding:3rem 1.5rem; color:var(--di
     <div class="foot-inner">
         <div>© <span id="year">2026</span> Enfrosec LLC · dba Faraday Soft</div>
         <div>
-            <a href="/help.html">Help</a> &nbsp;·&nbsp;
+            <a href="/">Home</a> &nbsp;·&nbsp;
             <a href="/privacy.html">Privacy</a> &nbsp;·&nbsp;
-            <a href="https://faradaysoft.com/terms.html">Terms</a> &nbsp;·&nbsp;
             <a href="mailto:support@faradaysoft.com">Support</a> &nbsp;·&nbsp;
             <a href="https://faradaysoft.com">Faraday Soft</a>
         </div>
     </div>
-    <p class="disclaimer">Lock Chimes is not affiliated with, endorsed by, or connected to Tesla, Inc. Tesla, Model 3, Model Y, Model S, Model X and Cybertruck are trademarks of Tesla, Inc., used only to describe which vehicles the app works with.</p>
+    <p class="disclaimer">Lock Chimes is not affiliated with, endorsed by, or connected to Tesla, Inc. Tesla is a trademark of Tesla, Inc.</p>
 </footer>
-<script>
-document.getElementById('year').textContent = new Date().getFullYear();
-document.querySelectorAll('.swatch').forEach(s => s.addEventListener('click', () => {
-  if (window.lock3d) { window.lock3d.setColors(s.dataset.body, s.dataset.shackle); window.lock3d.bounce(); }
-  document.getElementById('lock3d').scrollIntoView({ behavior: 'smooth', block: 'center' });
-}));
-</script>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
