@@ -27,10 +27,13 @@ nav { position:fixed; top:0; width:100%; z-index:100; display:flex; justify-cont
 .nav-links { display:flex; gap:1.4rem; font-size:0.9rem; }
 .nav-links a { color:var(--muted); text-decoration:none; }
 .nav-links a:hover { color:var(--text); }
+.nav-links a.maker { color:var(--red); font-weight:600; }
 .hero { padding:9rem 1.5rem 4rem; text-align:center; position:relative; overflow:hidden; }
 .hero::before { content:""; position:absolute; top:-200px; left:50%; transform:translateX(-50%); width:700px; height:700px; background:radial-gradient(circle, rgba(255,46,46,0.16), transparent 65%); pointer-events:none; }
 .hero-inner { position:relative; max-width:760px; margin:0 auto; }
 .hero img { width:120px; height:120px; border-radius:28px; box-shadow:0 20px 60px -20px var(--glow); margin-bottom:1.6rem; }
+.kicker a { color:inherit; text-decoration:underline; text-underline-offset:4px; text-decoration-color:rgba(255,46,46,0.5); }
+.kicker a:hover { text-decoration-color:var(--red); }
 .kicker { font-family:'JetBrains Mono',monospace; font-size:0.72rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--red); margin-bottom:1.2rem; font-weight:700; }
 h1 { font-size:clamp(2.3rem,6.5vw,4.4rem); line-height:1.04; font-weight:900; letter-spacing:-0.035em; margin-bottom:1.3rem; }
 .sub { font-size:clamp(1.05rem,2.2vw,1.25rem); color:var(--muted); max-width:620px; margin:0 auto 2.2rem; }
@@ -108,6 +111,7 @@ pre .c { color:var(--dim); }
         <a href="/#how">How it works</a>
         <a href="/#pro">Pro</a>
         <a href="/help.html">Help</a>
+        <a href="https://faradaysoft.com" class="maker" title="Made by Faraday Soft">Faraday Soft ↗</a>
     </div>
 </nav>
 
