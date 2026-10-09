@@ -1,0 +1,8 @@
+{
+  "name": "Lock Chimes examples",
+  "sounds": [
+    { "title": "Marimba", "url": "https://lockchimes.app/sources/Marimba.wav" },
+    { "title": "Church Bell", "url": "https://lockchimes.app/sources/Church-Bell.wav" },
+    { "title": "Ta-Da", "url": "https://lockchimes.app/sources/Ta-Da.wav" }
+  ]
+}
